@@ -10,20 +10,7 @@
     background-size: cover;
   }
 
-  .logo {
-    line-height: 60px;
-    position: fixed;
-    float: left;
-    margin: 16px 46px;
-    color: #fff;
-    font-weight: bold;
-    font-size: 20px;
-    letter-spacing: 2px;
-}
-
 nav {
-  position: fixed;
-  width: 100%;
   line-height: 60px;
 }
 
@@ -31,11 +18,8 @@ nav ul {
   line-height: 60px;
   list-style: none;
   background: rgba(0, 0, 0, 0);
-  overflow: hidden;
   color: #fff;
-  padding: 0;
   text-align: right;
-  margin: 0;
   padding-right: 40px;
   transition: 1s;
 }
@@ -46,22 +30,15 @@ nav.black ul {
 
 nav ul li {
   display: inline-block;
-  padding: 16px 40px;
+  padding-right: 40px;
 }
 
 nav ul li a {
-  text-decoration: none;
   color: #fff;
   font-size: 16px;
 }
 
 @media(max-width: 786px) {
-
-  .logo {
-        position: fixed;
-        top: 0;
-        margin-top: 16px;
-  }
 
   nav ul {
         max-height: 0px;
@@ -81,9 +58,5 @@ nav ul li a {
         width: 100%;
         padding: 24px;
         text-align: center;
-  }
-
-  .menu-icon {
-        display: block;
   }
 }
