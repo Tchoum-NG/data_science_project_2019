@@ -38,7 +38,7 @@ Thumbs.db
 
 # Jupyter Notebook
 #####################
-.ipynb_checkpointsi
+.ipynb_checkpoints
 
 # Latex
 *.aux
@@ -64,3 +64,8 @@ Thumbs.db
 *.mtc1
 *.out
 *.synctex.gz
+
+*.nav
+pitch/*.pdf
+*.snm
+*.vrb
