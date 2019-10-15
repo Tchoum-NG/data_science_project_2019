@@ -14,11 +14,15 @@ nav {
   line-height: 60px;
 }
 
+.navbar-fixed-top.scrolled {
+  background-color: rgba(54, 54, 54, 0.61) !important;
+  transition: background-color 200ms linear;
+}
+
 nav ul {
   line-height: 60px;
   list-style: none;
   transition: 1s;
-  border: 1px solid black;
   width: 100%;
   margin-left: 100%;
 }
