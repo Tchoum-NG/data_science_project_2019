@@ -30,40 +30,55 @@
         <p style="color: white;">what comes after planet Earth?</p>
       </div>
     </div>
-    <div id="content" style="margin: 5%">
+    <div id="content" style="margin: 10%">
       <div class="col" style="color: white">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
       </div>
-      <table class="table table-sm" style="color: white;">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody id='table-body'>
-          <% var data = JSON.parse(datap1) %>
-          <% for(var i=0; i < 21; i++) { %>
+      <div class="row">
+        <table class="table table-sm col-5" style="color: white;">
+          <caption>Non-weighted similarity</caption>
+          <thead class="thead-light">
             <tr>
-              <td><%- data[i].rowid %></td>
-              <td><%= data[i].fpl_name %></td>
-              <td><%- i %></td>
+              <th>#</th>
+              <th>Name</th>
+              <th>Score</th>
             </tr>
-          <% } %>
-        </tbody>
-      </table>
-      <!--<p style="color: white"><%- JSON.parse(datap1) %></p>-->
-      <script>
-        var data = [<% data%>];
-        $(document).ready(function(){
-          //var datap = JSON.parse(datap1);
-          p = document.createElement('p')
-          text = document.createTextNode(data[1])
-          p.appendChild(text)
-          document.getElementById('content').appendChild(p)
-        })
-      </script>
+          </thead>
+          <tbody id='table-body'>
+            <% var data = JSON.parse(datap1) %>
+            <% data.sort(function(a,b) {return b.simil - a.simil}) %>
+            <% for(var i=0; i < 21; i++) { %>
+              <tr>
+                <td><%- i %></td>
+                <td><%= data[i].fpl_name %></td>
+                <td><%- data[i].simil %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+        <div class="col-2"></div>
+        <table class="table table-sm col-5" style="color: white;">
+            <caption>Weighted similarity</caption>
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Weighted Score</th>
+              </tr>
+            </thead>
+            <tbody id='table-body'>
+              <% var data = JSON.parse(datap1) %>
+              <% data.sort(function(a,b) {return b.weighted_simil - a.weighted_simil}) %>
+              <% for(var i=0; i < 21; i++) { %>
+                <tr>
+                  <td><%- i %></td>
+                  <td><%= data[i].fpl_name %></td>
+                  <td><%- data[i].weighted_simil %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
