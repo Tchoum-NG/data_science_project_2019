@@ -1,8 +1,9 @@
   
   /* Change the color of links on hover */
   .topnav a:hover {
-    background-color: rgb(255, 255, 255);
-    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.185);
+    color: white;
+    border-radius: 3px;
   }
 
   header {
