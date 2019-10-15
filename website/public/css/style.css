@@ -18,6 +18,9 @@ nav ul {
   line-height: 60px;
   list-style: none;
   transition: 1s;
+  border: 1px solid black;
+  width: 100%;
+  margin-left: 100%;
 }
 
 nav.black ul {
@@ -26,11 +29,12 @@ nav.black ul {
 
 nav ul li {
   display: inline-block;
-  padding-left: 40px;
+  padding-right: 40px;
 }
 
 nav ul li a {
   color: #fff;
+  margin-top: 16px;
   font-size: 16px;
 }
 
