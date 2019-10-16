@@ -43,7 +43,7 @@
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
       </div>
       <div class="row">
-        <table class="table table-sm col-5" style="color: white;">
+        <table class="table table-hover table-sm col-5" style="color: white;">
           <caption>Non-weighted similarity</caption>
           <thead class="thead-light">
             <tr>
@@ -56,7 +56,7 @@
             <% var data = JSON.parse(datap1) %>
             <% data.sort(function(a,b) {return b.simil - a.simil}) %>
             <% for(var i=0; i < 21; i++) { %>
-              <tr>
+              <tr data-toggle="popover" data-trigger="hover" title="popover" data-content="interesting stuff">
                 <td><%- i %></td>
                 <td><%= data[i].fpl_name %></td>
                 <td><%- data[i].simil %></td>
