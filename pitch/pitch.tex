@@ -39,7 +39,23 @@
 %---------------------------------------------------
 
 \begin{frame}{Motivation}
-    content...
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Earth is facing environmental issues
+                \item An attempt to change habits as to save the Earth
+                \item Finding possible new home -- livable exoplanet
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{center}
+                \includegraphics[width=0.9\textwidth]{graphics/apocalypse.pdf}
+            \end{center}
+        \end{column}
+    \end{columns}
+    \begin{block}{Exoplanet}
+        A planet outside the Solar System. 
+    \end{block}
 \end{frame}
 
 %---------------------------------------------------
@@ -47,75 +63,38 @@
 %---------------------------------------------------
 
 \begin{frame}{Goals}
-    content...
+    \begin{itemize}
+        \item \textbf{Compute livability ranking of exoplanets}
+        \item Find the most sufficient planet to colonize
+        \item Ranking by similarity to the Earth:
+            \begin{itemize}
+                \item temperature,
+                \item gravity,
+                \item star luminosity, \dots
+            \end{itemize}
+        \item Create a website displaying the ranking
+    \end{itemize}
 \end{frame}
 
 %---------------------------------------------------
 \section{Results}
 %---------------------------------------------------
 
-\begin{frame}{Results}
-    content...
-\end{frame}
-
-%---------------------------------------------------
-%---------------------------------------------------
-
-\begin{frame}
-    \frametitle{list}
-
-    \begin{itemize}
-        \item Item 1
-        \item Item 2
-        \item \dots
-    \end{itemize}
-
-\end{frame}
-
-%---------------------------------------------------
-
-\begin{frame}
-    \frametitle{blocks}
-    
-    \href{www.google.com}{Google}
-
-    \begin{block}{Remark}
-        content...
-    \end{block}
-
-    \begin{alertblock}{Alert}
-        content...
-    \end{alertblock}
-
-    \begin{examples}{Alert}
-        content...
-    \end{examples}
-        
-\end{frame}
-
-%---------------------------------------------------
-
-\begin{frame}
-\frametitle{blocks}
-
-    \begin{columns}
-        \begin{column}{.4\textwidth}
-            content...
-        \end{column}
-        \begin{column}{.4\textwidth}
-            content...
-        \end{column}
-    \end{columns}
-
-\end{frame}
-
-%---------------------------------------------------
-
-\begin{frame}
-    \frametitle{Logo}
-    \begin{center}
-        \includegraphics[width=0.5\paperwidth]{graphics/logo-uh}
-    \end{center}
+\begin{frame}{The Best Exoplanets}
+    \begin{table}
+        Candidate for further research is exoplanet \textbf{K2-85} with rank 99.45 (out of 100). \\~\\
+        \begin{tabular}{| l || c | c | c|}
+            Planet            & Earth   & K2-85 & K2-117  \\ \hline
+            Time to orbit [days] & 365.26 & 0.68   & 1.29 \\ 
+            Radius          [EU] & 1         & 1.01   & 2.03 \\
+            Mass             [EU] & 1          & 1.01  & 4.78 \\
+            Stellar gravity [log10(cm/s**2)] & 5.44     & 4.78   & 4.75 \\
+            Stellar luminosity [log10(SL)]& 0     & -0.84 & -1.36 \\
+            Distance       [pc] & 0          & 97.49  & 101.95 \\
+            Rank              & 100      & 99.45   & 99.42 \\
+        \end{tabular}
+        \caption{Attributes of the best planets}
+    \end{table}
 \end{frame}
 
 %---------------------------------------------------
