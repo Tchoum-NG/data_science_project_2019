@@ -13,10 +13,10 @@ app.get('/', function (req, res) {
       datap.push(row);
     })
     .on('end', () => {
-      console.log(JSON.stringify(datap[0]))
+      //console.log(JSON.stringify(datap[0]))
       console.log('successfully read the csv file');
       res.render('index', {
-        datap1: JSON.stringify(datap)
+        datap1: JSON.stringify(datap),
       });
     })
 })
