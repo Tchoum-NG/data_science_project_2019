@@ -5,6 +5,7 @@
     <title>Exoranking : Home</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script>
@@ -89,8 +90,62 @@
             </tbody>
           </table>
         </div>
-        <div id="distance-plot">
+
+
+        <div id="discovery-plot">
+          <canvas id="myChart" width="400" height="100"></canvas>
         </div>
+        <script>
+
+          let bardata = [];
+          for(let i = 0; i<29; i++){
+            bardata.push(0);
+          }
+
+          
+          "<% var yeararray = []%>"
+          "<% for(let i = 1;i<4056;i++){ %>"
+            "<% console.log(data[i].fpl_disc)%>;"
+            "<% yeararray.push(data[i].fpl_disc)%>;"
+            
+          "<%} %>"
+          "<%console.log(yeararray);%>"
+          let machin = "<%= yeararray%>";
+          let years = (JSON.parse("[" + machin + "]"));
+          for(let i=1 ;i<years.length;i++ ){
+            bardata[2019-years[i]] ++;
+          }
+          bardata.length=29;
+          bardata.reverse()
+
+          var ctx = document.getElementById('myChart').getContext('2d');
+          var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels:["1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
+              datasets:[{
+                borderWidth: 3,
+                data:bardata,
+                label: "number of exoplanets discovered per year since 1990",
+                backgroundColor: 'rgba(100, 100, 200, 0.7)'
+              }],
+            options: {
+              scales: {
+              xAxes: {
+                ticks: {
+                  fontColor: 'black'
+                }
+              }
+    }
+}
+          }});
+          
+        
+        </script>
+        
+
+
+
     </div>
     <div class="footer-copyright text-center py-3" style="color: white;">© 2019 Copyright:
       <a href="https://github.com/Ngoron/data_science_project_2019" style="color: rgb(0, 162, 255)"> Exoranking Foundation</a>
