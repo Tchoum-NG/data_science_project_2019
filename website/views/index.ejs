@@ -79,7 +79,8 @@
               <% var data = JSON.parse(datap1) %>
               <% data.sort(function(a,b) {return b.weighted_simil - a.weighted_simil}) %>
               <% for(var i=0; i < 21; i++) { %>
-                <tr data-toggle="popover" data-trigger="hover" title="Distance [parsec]" data-content="<%- data[i].fst_dist %>">
+                <% var popovercontent = "Distance [parsec]: ".concat(data[i].fst_dist, "\n", "Orbital Period [days]: ", data[i].fpl_orbper, "\n", "Planet Radius [Earth]: ", data[i].fpl_rads) %>
+                <tr data-toggle="popover" data-trigger="hover" title="<%- data[i].fpl_name%>" data-content="<%- popovercontent %>">
                   <td><%- i %></td>
                   <td><%= data[i].fpl_name %></td>
                   <td><%- data[i].weighted_simil %></td>
