@@ -93,7 +93,7 @@
 
 
         <div id="discovery-plot">
-          <canvas id="imgonnashootmyself" width="400" height="00"></canvas>
+          <canvas id="imgonnashootmyself" width="400" height="150"></canvas>
         </div>
         <script>
 
@@ -109,7 +109,6 @@
             "<% yeararray.push(data[i].fpl_disc)%>;"
             
           "<%} %>"
-          "<%console.log(yeararray);%>"
           let machin = "<%= yeararray%>";
           let years = (JSON.parse("[" + machin + "]"));
           for(let i=1 ;i<years.length;i++ ){
@@ -136,9 +135,6 @@
                   }
                 }
               },
-              legend: {
-                display: false
-              },
               title: {
                 display: true,
                 text: 'number of exoplanets discovered per year since 1990'
@@ -152,7 +148,7 @@
 
 
         <div id="distance">
-          <canvas id="idunnoman" width="400" height="200"></canvas>
+          <canvas id="idunnoman" width="200" height="100"></canvas>
         </div>
         <script>
         
