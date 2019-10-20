@@ -6,6 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script>
@@ -190,6 +191,155 @@
         });
         
         </script>
+
+    <div id="distance2">
+        <canvas id="distance-plot2" width="200" height="100"></canvas>
+      </div>
+      
+      <script>
+
+      var distseries = []
+      for(var i=0; i < 12; i++){
+        distseries.push(
+          {
+            name: "<%= data[i].fpl_name %>",
+            color: "#4cb6e8",
+            data: [[Number("<%- data[i].fst_dist %>"), 0]],
+          }
+        )
+      }
+      distseries.push({
+            name: "Earth",
+            color: "#b20303",
+            data: [[0, 0]],
+            zIndex: 8,
+            marker: {
+                symbol: "diamond"
+            }
+
+        })
+      //console.log(distseries)
+      
+      var ctx = document.getElementById('distance-plot2').getContext('2d');
+      $('#distance2').highcharts({
+        credits: {
+            enabled: !1
+        },
+        chart: {
+            type: "scatter",
+            height: 140,
+            width: 1160,
+            renderTo: "chart"
+        },
+        title: {
+            style: {
+                color: "#000",
+                fontFamily: "Helvetica, Arial, sans-serif",
+                fontSize: "12px",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                whiteSpace: "normal"
+            },
+            text: "Distance to Earth [parsec]"
+        },
+        legend: {
+            text: null,
+            useHTML: !0,
+            x: 20,
+            align: "center",
+            itemStyle: {
+                color: "#000",
+                fontFamily: "Stationery, Helvetica, Arial, sans-serif",
+                fontSize: "8px",
+                fontWeight: "normal",
+                lineHeight: "10px",
+                textTransform: "uppercase"
+            },
+            borderWidth: 0,
+            enabled: !0,
+            itemMarginTop: 0,
+            itemMarginBottom: 0,
+            layout: "horizontal",
+            verticalAlign: "bottom"
+        },
+        xAxis: {
+            title: {
+                text: null,
+
+            },
+            min: 0,
+            max: 8500,
+            labels: {
+                enabled: !1
+            },
+            tickLength: 0,
+            lineWidth: 0
+        },
+        yAxis: [{
+            max: 0,
+            min : 0,
+            tickInterval: 1,
+
+            title: {
+                text: "How far is it?",
+                rotation: 0,
+                align: "middle",
+                offset: 50,
+                style: {
+                    color: "#000",
+                    fontFamily: "Stationery, Helvetica, Arial, sans-serif",
+                    fontSize: "10px",
+                    fontWeight: "normal",
+                    lineHeight: "10px",
+                    textTransform: "uppercase"
+                }
+
+            },
+            labels: {
+
+                enabled: !1
+            },
+            tickWidth: 0,
+            tickLength: 0,
+            maxPadding: 0,
+            padding: 30,
+            gridLineWidth: 2
+        }, {
+            title: {
+                text: "Distance [parsec]",
+                rotation: 0,
+                align: "middle",
+                offset: 50
+            },
+            opposite: !0
+        }],
+        plotOptions: {
+            scatter: {
+                events: {
+                    legendItemClick: function () {
+                        return !1
+                    }
+                },
+                marker: {
+                    radius: 6,
+                    states: {
+                        hover: {
+                            enabled: !0
+                        }
+                    },
+                    symbol: "circle"
+                },
+                tooltip: {
+                    fontFamily: "Stationery, Helvetica, Arial, sans-serif",
+                    headerFormat: "<b>{series.name}</b><br>",
+                    pointFormat: "{point.x} parsec"
+                }
+            }
+        },
+        series: distseries,
+
+    });
+      </script>
 
 
     </div>
