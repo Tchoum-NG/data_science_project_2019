@@ -21,14 +21,6 @@
     <header>
       <nav class="navbar fixed-top navbar-fixed-top topnav navbar-expand-lg " id="navbar-fixed-top">
         <div class="navbar-brand" style="color: white;">Exoplanets</div>
-        <div class="menu">
-          <ul>
-            <li><a class="navbar-brand active" href="/">Home</a></li>
-            <li><a href="vis1">Visualisation 1</a></li>
-            <li><a href="vis2">Visualisation 2</a></li>
-            <li><a href="vis3">Visualisation 3</a></li>
-          </ul>
-        </div>
       </nav>
     </header>
     <div class="row" style="width: 94%; margin: 3%;">
@@ -42,7 +34,7 @@
     </div>
     <div id="content" style="margin: 10%">
       <div class="col" style="color: white; padding-bottom: 2em;">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+          Each exoplanet from the original dataset has been studied and given a score computed by similarity to the earth. Two scoring 
       </div>
       <div class="row">
         <table class="table table-hover table-sm col-5" style="color: white;">
@@ -93,7 +85,7 @@
 
 
         <div id="discovery-plot">
-          <canvas id="imgonnashootmyself" width="400" height="100"></canvas>
+          <canvas id="imgonnashootmyself" width="400" height="200"></canvas>
         </div>
         <script>
 
@@ -117,7 +109,6 @@
           }
           bardata.length=29;
           bardata.reverse()
-          console.log(bardata);
           var ctx = document.getElementById('imgonnashootmyself').getContext('2d');
           var myBarChart = new Chart(ctx, {
             type: 'bar',
@@ -131,19 +122,64 @@
               }],
             options: {
               scales: {
-              xAxes: {
-                ticks: {
-                  fontColor: 'black'
+                xAxes: {
+                  ticks: {
+                    fontColor: 'black'
+                  }
                 }
+              },
+              legend: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'number of exoplanets discovered per year since 1990'
               }
-    }
-}
+            }
           }});
           
         
         </script>
         
 
+
+        <div id="distance">
+          <canvas id="idunnoman" width="400" height="200"></canvas>
+        </div>
+        <script>
+        
+        var ctx = document.getElementById('idunnoman').getContext('2d');
+        new Chart(ctx, {
+          label: "swag",
+          data: {
+            labels: ["K2-85 b", "K2-49 b", "EPIC 201833600 c", "K2-50 b", "K2-81 b", "K2-83 b"],
+            datasets: [{
+              label: "distance from earth in parsecs of first 6 exoplanets in ranking",
+              data: [97.49, 463.06, 259.33, 259.33, 254.14, 125.98],
+              backgroundColor: [
+                'rgba(100, 100, 200, 0.7)',
+                'rgba(100, 100, 215, 0.7)',
+                'rgba(100, 100, 230, 0.7)',
+                'rgba(100, 115, 200, 0.7)',
+                'rgba(100, 130, 200, 0.7)',
+                'rgba(115, 100, 200, 0.7)',
+              ],
+              borderColor: "rgba(0, 0, 0, 0.8)"
+            }]
+          },
+          options: {
+            legend: {
+                display: false
+            },
+            title: {
+              display: true,
+              text: 'distance from earth in parsec of first 6 exoplanets in ranking'
+            }
+          },
+          type: 'polarArea'
+        });
+        
+        </script>
 
 
     </div>
