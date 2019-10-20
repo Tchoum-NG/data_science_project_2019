@@ -24,9 +24,9 @@
         <div class="menu">
           <ul>
             <li><a class="navbar-brand active" href="/">Home</a></li>
-            <li><a href="vis1">Visualisation 1</a></li>
-            <li><a href="vis2">Visualisation 2</a></li>
-            <li><a href="vis3">Visualisation 3</a></li>
+            <li><a href="#">Visualisation 1</a></li>
+            <li><a href="#">Visualisation 2</a></li>
+            <li><a href="#">Visualisation 3</a></li>
           </ul>
         </div>
       </nav>
@@ -93,7 +93,7 @@
 
 
         <div id="discovery-plot">
-          <canvas id="imgonnashootmyself" width="400" height="150"></canvas>
+          <canvas id="discovery-year" width="400" height="150"></canvas>
         </div>
         <script>
 
@@ -116,7 +116,7 @@
           }
           bardata.length=29;
           bardata.reverse()
-          var ctx = document.getElementById('imgonnashootmyself').getContext('2d');
+          var ctx = document.getElementById('discovery-year').getContext('2d');
           var myBarChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -125,7 +125,7 @@
                 borderWidth: 3,
                 data:bardata,
                 label: "number of exoplanets discovered per year since 1990",
-                backgroundColor: 'rgba(100, 100, 200, 0.7)'
+                backgroundColor: 'rgba(100, 100, 200, 0.99)',
               }],
             options: {
               scales: {
@@ -135,9 +135,15 @@
                   }
                 }
               },
+              legend: {
+                labels: {
+                  fontColor: 'white'
+                }
+              },
               title: {
                 display: true,
-                text: 'number of exoplanets discovered per year since 1990'
+                text: 'number of exoplanets discovered per year since 1990',
+                color: 'white'
               }
             }
           }});
@@ -148,11 +154,11 @@
 
 
         <div id="distance">
-          <canvas id="idunnoman" width="200" height="100"></canvas>
+          <canvas id="distance-plot" width="200" height="100"></canvas>
         </div>
         <script>
         
-        var ctx = document.getElementById('idunnoman').getContext('2d');
+        var ctx = document.getElementById('distance-plot').getContext('2d');
         new Chart(ctx, {
           label: "swag",
           data: {
