@@ -47,6 +47,14 @@ tr:hover td {
   color: white;
 }
 
+#discovery-plot {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+#distance2 {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
 @media(max-width: 786px) {
 
   nav ul {

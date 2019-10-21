@@ -6,6 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script>
@@ -24,9 +25,9 @@
         <div class="menu">
           <ul>
             <li><a class="navbar-brand active" href="/">Home</a></li>
-            <li><a href="vis1">Visualisation 1</a></li>
-            <li><a href="vis2">Visualisation 2</a></li>
-            <li><a href="vis3">Visualisation 3</a></li>
+            <li><a href="#">Visualisation 1</a></li>
+            <li><a href="#">Visualisation 2</a></li>
+            <li><a href="#">Visualisation 3</a></li>
           </ul>
         </div>
       </nav>
@@ -42,7 +43,7 @@
     </div>
     <div id="content" style="margin: 10%">
       <div class="col" style="color: white; padding-bottom: 2em;">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+          Each exoplanet from the original dataset has been studied and given a score computed by similarity to the earth. Two scoring 
       </div>
       <div class="row">
         <table class="table table-hover table-sm col-5" style="color: white;">
@@ -93,7 +94,7 @@
 
 
         <div id="discovery-plot">
-          <canvas id="myChart" width="400" height="100"></canvas>
+          <canvas id="discovery-year" width="400" height="150"></canvas>
         </div>
         <script>
 
@@ -109,7 +110,6 @@
             "<% yeararray.push(data[i].fpl_disc)%>;"
             
           "<%} %>"
-          "<%console.log(yeararray);%>"
           let machin = "<%= yeararray%>";
           let years = (JSON.parse("[" + machin + "]"));
           for(let i=1 ;i<years.length;i++ ){
@@ -117,33 +117,229 @@
           }
           bardata.length=29;
           bardata.reverse()
-
-          var ctx = document.getElementById('myChart').getContext('2d');
+          var ctx = document.getElementById('discovery-year').getContext('2d');
           var myBarChart = new Chart(ctx, {
             type: 'bar',
             data: {
-              labels:["1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
+              labels:["1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019"],
               datasets:[{
                 borderWidth: 3,
                 data:bardata,
                 label: "number of exoplanets discovered per year since 1990",
-                backgroundColor: 'rgba(100, 100, 200, 0.7)'
+                backgroundColor: 'rgba(100, 100, 200, 0.99)',
               }],
             options: {
               scales: {
-              xAxes: {
-                ticks: {
-                  fontColor: 'black'
+                xAxes: {
+                  ticks: {
+                    fontColor: 'black'
+                  }
                 }
+              },
+              legend: {
+                labels: {
+                  fontColor: 'white'
+                }
+              },
+              title: {
+                display: true,
+                text: 'number of exoplanets discovered per year since 1990',
+                color: 'white'
               }
-    }
-}
+            }
           }});
           
         
         </script>
         
 
+
+        <div id="distance">
+          <canvas id="distance-plot" width="200" height="100"></canvas>
+        </div>
+        <script>
+        
+        var ctx = document.getElementById('distance-plot').getContext('2d');
+        new Chart(ctx, {
+          label: "swag",
+          data: {
+            labels: ["K2-85 b", "K2-49 b", "EPIC 201833600 c", "K2-50 b", "K2-81 b", "K2-83 b"],
+            datasets: [{
+              label: "distance from earth in parsecs of first 6 exoplanets in ranking",
+              data: [97.49, 463.06, 259.33, 259.33, 254.14, 125.98],
+              backgroundColor: [
+                'rgba(100, 100, 200, 0.7)',
+                'rgba(100, 100, 215, 0.7)',
+                'rgba(100, 100, 230, 0.7)',
+                'rgba(100, 115, 200, 0.7)',
+                'rgba(100, 130, 200, 0.7)',
+                'rgba(115, 100, 200, 0.7)',
+              ],
+              borderColor: "rgba(0, 0, 0, 0.8)"
+            }]
+          },
+          options: {
+            legend: {
+                display: false
+            },
+            title: {
+              display: true,
+              text: 'distance from earth in parsecs of first 6 exoplanets in ranking'
+            }
+          },
+          type: 'polarArea'
+        });
+        
+        </script>
+
+    <div id="distance2">
+        <canvas id="distance-plot2" width="200" height="100"></canvas>
+      </div>
+      
+      <script>
+
+      var distseries = []
+      for(var i=0; i < 12; i++){
+        distseries.push(
+          {
+            name: "<%= data[i].fpl_name %>",
+            color: "#4cb6e8",
+            data: [[Number("<%- data[i].fst_dist %>"), 0]],
+          }
+        )
+      }
+      distseries.push({
+            name: "Earth",
+            color: "#b20303",
+            data: [[0, 0]],
+            zIndex: 8,
+            marker: {
+                symbol: "diamond"
+            }
+
+        })
+      //console.log(distseries)
+      
+      var ctx = document.getElementById('distance-plot2').getContext('2d');
+      $('#distance2').highcharts({
+        credits: {
+            enabled: !1
+        },
+        chart: {
+            type: "scatter",
+            height: 140,
+            width: 1160,
+            renderTo: "chart"
+        },
+        title: {
+            style: {
+                color: "#000",
+                fontFamily: "Helvetica, Arial, sans-serif",
+                fontSize: "12px",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                whiteSpace: "normal"
+            },
+            text: "Distance to Earth [parsec]"
+        },
+        legend: {
+            text: null,
+            useHTML: !0,
+            x: 20,
+            align: "center",
+            itemStyle: {
+                color: "#000",
+                fontFamily: "Stationery, Helvetica, Arial, sans-serif",
+                fontSize: "8px",
+                fontWeight: "normal",
+                lineHeight: "10px",
+                textTransform: "uppercase"
+            },
+            borderWidth: 0,
+            enabled: !0,
+            itemMarginTop: 0,
+            itemMarginBottom: 0,
+            layout: "horizontal",
+            verticalAlign: "bottom"
+        },
+        xAxis: {
+            title: {
+                text: null,
+
+            },
+            min: 0,
+            max: 8500,
+            labels: {
+                enabled: !1
+            },
+            tickLength: 0,
+            lineWidth: 0
+        },
+        yAxis: [{
+            max: 0,
+            min : 0,
+            tickInterval: 1,
+
+            title: {
+                text: "How far is it?",
+                rotation: 0,
+                align: "middle",
+                offset: 50,
+                style: {
+                    color: "#000",
+                    fontFamily: "Stationery, Helvetica, Arial, sans-serif",
+                    fontSize: "10px",
+                    fontWeight: "normal",
+                    lineHeight: "10px",
+                    textTransform: "uppercase"
+                }
+
+            },
+            labels: {
+
+                enabled: !1
+            },
+            tickWidth: 0,
+            tickLength: 0,
+            maxPadding: 0,
+            padding: 30,
+            gridLineWidth: 2
+        }, {
+            title: {
+                text: "Distance [parsec]",
+                rotation: 0,
+                align: "middle",
+                offset: 50
+            },
+            opposite: !0
+        }],
+        plotOptions: {
+            scatter: {
+                events: {
+                    legendItemClick: function () {
+                        return !1
+                    }
+                },
+                marker: {
+                    radius: 6,
+                    states: {
+                        hover: {
+                            enabled: !0
+                        }
+                    },
+                    symbol: "circle"
+                },
+                tooltip: {
+                    fontFamily: "Stationery, Helvetica, Arial, sans-serif",
+                    headerFormat: "<b>{series.name}</b><br>",
+                    pointFormat: "{point.x} parsec"
+                }
+            }
+        },
+        series: distseries,
+
+    });
+      </script>
 
 
     </div>
