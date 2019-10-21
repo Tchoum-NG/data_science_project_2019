@@ -1,4 +1,7 @@
 website/node_modules/
+*.bcf
+*.run.xml
+
 
 # Compiled source #
 ###################
