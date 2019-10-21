@@ -25,9 +25,9 @@
         <div class="menu">
           <ul>
             <li><a class="navbar-brand active" href="/">Home</a></li>
-            <li><a href="#" onclick="scrollTo('.ranking');">Ranking</a></li>
-            <li><a href="#" onclick="scrollTo('.discovery-plot');">Year of Discovery</a></li>
-            <li><a href="#">Visualisation 3</a></li>
+            <li><a href="#" onclick="scrollTo('.ranking')">Ranking</a></li>
+            <li><a href="#" onclick="scrollTo('.discovery-plot')">Year of Discovery</a></li>
+            <li><a href="#" onclick="scrollTo('.distance-div')">Distance to Earth</a></li>
           </ul>
         </div>
       </nav>
@@ -166,47 +166,14 @@
           
         
         </script>
-        
 
-
-        <div id="distance">
-          <canvas id="distance-plot" width="200" height="100"></canvas>
-        </div>
-        <script>
-        
-        var ctx = document.getElementById('distance-plot').getContext('2d');
-        new Chart(ctx, {
-          label: "swag",
-          data: {
-            labels: ["K2-85 b", "K2-49 b", "EPIC 201833600 c", "K2-50 b", "K2-81 b", "K2-83 b"],
-            datasets: [{
-              label: "distance from earth in parsecs of first 6 exoplanets in ranking",
-              data: [97.49, 463.06, 259.33, 259.33, 254.14, 125.98],
-              backgroundColor: [
-                'rgba(100, 100, 200, 0.7)',
-                'rgba(100, 100, 215, 0.7)',
-                'rgba(100, 100, 230, 0.7)',
-                'rgba(100, 115, 200, 0.7)',
-                'rgba(100, 130, 200, 0.7)',
-                'rgba(115, 100, 200, 0.7)',
-              ],
-              borderColor: "rgba(0, 0, 0, 0.8)"
-            }]
-          },
-          options: {
-            legend: {
-                display: false
-            },
-            title: {
-              display: true,
-              text: 'distance from earth in parsecs of first 6 exoplanets in ranking'
-            }
-          },
-          type: 'polarArea'
-        });
-        
-        </script>
-
+    <br>
+    <hr style="border-color: white">
+    <br>
+    <h4 style="color: white; text-align:center" id="distance-div">Distance to Earth</h4>
+    <br>
+    <p style="color:white">In astronomy distance is typically measured in parsec. 1 parsec equalls 3.26 light years, whereas one light year equals 9.46 trillion kilometers. Really far away!</p>
+    <br>
     <div id="distance2">
         <canvas id="distance-plot2" width="200" height="100"></canvas>
       </div>
