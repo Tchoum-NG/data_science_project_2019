@@ -60,15 +60,20 @@ We can see in Figure~\ref{pic:cluster} that the Earth is situated in the green c
 
 %------------------------------------------------------------------
 
-\section{Ranking}
-The ranking is computed by evaluating the similarity of each exoplanet to the specs of planet Earth based on a the parameters we extracted beforehand such as the surface temperature of the planet, it’s gravity, it’s light exposition, etc. We believe that some parameters probably have a bigger impact than others on how ``livable`` an exoplanet is. For instance, the year of discovery of the planet is probably not as important as it's surface temperature or it's gravitational force. Therefore two rankings have been computed: There is one ranking that doesn't take into account the weight of the parameters, and one that does.
+\section{Exoplanet Ranking}
+To compute the ranking we use vector similarity between each exoplanet and the Earth. All those vectors are obtained from the Exoplanet dataset. The vectors are preprocessed, so there is not any missing data and the values are normalized into same range (from 0 to 1).
 
-In the so-called weighted ranking, parameters will see themselves attributed a weight coefficient that goes from 0 to 10 , which influences the computed score and therefore results in a different rating. The importance factors that were associated with the attributes were introduced by our sense of understanding on what is important.
-
-The Ranking is computed using the native python-embedded cosine similarity formula, where $u$ and $v$ are the vectors for on exoplanet data row, and $w$ the weight coefficient of a parameter.
+Cosine distance implemented in \textit{Scikit-learn}\footnotemark[\value{footnote}] library is used as a similarity measure between vectors. The presumption is that the most similar exoplanets to the Earth are the most likely sufficient for the life. The exact formula is displayed in Formula~\ref{eq:cosine}.
 
 \begin{align}
-\text{cosine}(u,v) &= \frac{\sum_{i=0}^{n-1} u_iv_i  }{ \sqrt{\sum_{i=0}^{n-1} u_i^2  } \sqrt{\sum_{i=0}^{n-1} v_i^2  }} \label{eq:cosine}\\
+    \text{cosine}(u,v) &= \frac{\sum_{i=0}^{n-1} u_iv_i  }{ \sqrt{\sum_{i=0}^{n-1} u_i^2  } \sqrt{\sum_{i=0}^{n-1} v_i^2  }} \label{eq:cosine}
+\end{align}
+
+It is supposed that some parameters have a bigger impact than others on how ``livable`` an exoplanet is. For instance, the metal abundance is probably not as important as surface temperature. Therefore two rankings have been computed -- the second one take into account the weight of the parameters.
+
+We created a weight vector $w$ that can be seen in Table~\ref{tab:att_desc} with weight in range from 1--10 for each attribute of exoplanets. To compute the weighted cosine similarity the library \textit{SciPy}\footnote{https://www.scipy.org} is used. Where it is implemented as correlation between vectors with weighted averages as describes Formula~\ref{eq:cosine_weighted} and Formula~\ref{eq:weighted_mean}, where $u$ and $v$ are the vectors of exoplanets.
+
+\begin{align}
 \text{cosine}_{\text{weighted}}(u,v,w) &= \frac{\sum_{i=0}^{n-1} (u_i-\overline{u_w})(v_i-\overline{v_w})  }{ \sqrt{\sum_{i=0}^{n-1} (u_i-\overline{u_w})^2  } \sqrt{\sum_{i=0}^{n-1} (v_i-\overline{v_w})^2  }} \label{eq:cosine_weighted} \\
 \overline{u_w} &= \frac{ \sum_{i=0}^{n-1} u_iw_i }{ \sum_{i=0}^{n-1} w_i } \label{eq:weighted_mean}
 \end{align}
