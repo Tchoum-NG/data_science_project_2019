@@ -7,6 +7,7 @@
 \usepackage{caption}
 \usepackage{mathtools}
 \usepackage{lscape}
+\usepackage{numprint}
 
 \usepackage[backend=biber,style=iso-numeric,sorting=none]{biblatex}
 \bibliography{references.bib}
@@ -35,17 +36,10 @@ The results of our work take form in two materials; the ranking dataset which fe
 %------------------------------------------------------------------
 
 \section{Preprocessing and Analysis}
-The dataset~\cite{dataset} we used is from an archive hosted by the NASA exoplanet science institute which is operated by the California Institute of Technology. The dataset features 4056 exoplanets.
+The dataset~\cite{dataset} we used is from an archive hosted by the NASA exoplanet science institute which is operated by the California Institute of Technology. In the dataset there is data about \numprint{4056} exoplanets with \numprint{47} various attributes (e.g.\ temperature, star luminosity, distance). These attributes are used to determine the ``livability score'', since they influence, if humanity could survive on this planet.
 
-The data collection includes data from 47 attributes, that contain administrative information like the name of the planet or the planetary system, but also information about metal sources or the luminosity, which can be used for our ranking, since they influence, if humanity could survive on this planet.
+As a first step we removed the columns, that contained irrelevant information for out task such as website links or different names of the exoplanet. Next step was to drop columns with high ration of missing data. In the column \verb|fpl_eccen| is \numprint[\%]{61.7} missing and in the column \verb|fst_spt| \numprint[\%]{66.3}. As a result only \numprint{20} columns left for the ranking, these attributes are deeply described in Figure~\ref{tab:att_desc}. Since the domain knowledge of physicists, astrologists and maybe even biologists is needed, we use all the attributes mentioned above for our experiments. For further experiments is supposed the consultation with specialist about the livability impact of each attribute in the dataset.
 
-As a first step we removed the columns, that seemed to contain data, that is irrelevant for our task (e.g. multiple columns contain links to studies proving the veracity of the data in other columns; since the data is published by an official institute, that works in close relation to the NASA, we rely on the credibility of the data). 
-
-We also dropped columns where a significant amount of data was missing. About a dozen columns of the original 47 columns from the dataset had a missing data ratio of above 75 percent, so interpolating the existing data in these columns would lead to highly distorted results.
-
-Since it needs domain knowledge of physicists, astrologists and maybe even biologists, that we could not provide at this moment, we included most of the attributes into our ranking, that seemed to have a reasonable impact, when computing the similarity of the exoplanet to the Earth. We therefore combined the attribute descriptions in the dataset in combination with easily accessible information from Wikipedia.
-
-In total we reduced the number of attributes to 22 fully-filled and relevant columns for the computation of our ranking. We also added the Earth and it's information to the dataset, as it will be valuable for computing the ranking and visualisations later on. Description of all attributes can be found in Table~\ref{tab:att_desc}.
 
 %------------------------------------------------------------------
 
