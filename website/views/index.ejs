@@ -25,8 +25,8 @@
         <div class="menu">
           <ul>
             <li><a class="navbar-brand active" href="/">Home</a></li>
-            <li><a href="#">Visualisation 1</a></li>
-            <li><a href="#">Visualisation 2</a></li>
+            <li><a href="#" onclick="scrollTo('.ranking');">Ranking</a></li>
+            <li><a href="#" onclick="scrollTo('.discovery-plot');">Year of Discovery</a></li>
             <li><a href="#">Visualisation 3</a></li>
           </ul>
         </div>
@@ -43,9 +43,20 @@
     </div>
     <div id="content" style="margin: 10%">
       <div class="col" style="color: white; padding-bottom: 2em;">
-          Each exoplanet from the original dataset has been studied and given a score computed by similarity to the earth. Two scoring 
+          The urge to explore the unknown has always driven humanity to new inventions and explorations. Especially the outer space is one of the remaining mysteries.<br>
+          With <b>Exoplanets</b> we try to find the planet that is most similar to our beloved Earth to answer, what you always wanted to know: <br>
+          <br>
+          <ul>
+            <li><i>Are there more planets like the Earth?</i></li>
+            <li><i>Could there be other species in outer space?</i></li>
+            <li><i>Where are we going, when we have to leave planet Earth?</i></li>
+          </ul>
+          <br>
+          <hr style="border-color: white">
+          <h4 style="text-align: center">The Exoplanet Ranking</h4>
+          Each exoplanet from the original dataset has been studied and given a score computed by similarity to the Earth. On the left side is our ranking with the <i>original</i> data, on the right is the ranking with our <i>weighted</i> data. Try to hover them to find out more about the planet!
       </div>
-      <div class="row">
+      <div class="row" id="ranking">
         <table class="table table-hover table-sm col-5" style="color: white;">
           <caption>Non-weighted similarity</caption>
           <thead class="thead-light">
@@ -91,7 +102,10 @@
             </tbody>
           </table>
         </div>
-
+        <hr style="border-color: white">
+        <br>
+        <h4 style="color: white; text-align: center">Year of Discovery</h4>
+        <br>
 
         <div id="discovery-plot">
           <canvas id="discovery-year" width="400" height="150"></canvas>
@@ -200,9 +214,12 @@
 
       var distseries = []
       for(var i=0; i < 12; i++){
+        var tp = "<%- data["+str(i)+"] %>"
+        console.log(tp.fst_dist)
+        console.log(tp.fpl_name)
         distseries.push(
           {
-            name: "<%= data[i].fpl_name %>",
+            name: tp.fpl_name,
             color: "#4cb6e8",
             data: [[Number("<%- data[i].fst_dist %>"), 0]],
           }
@@ -219,6 +236,7 @@
 
         })
       //console.log(distseries)
+      console.log("<%= data[8].fpl_name %>")
       
       var ctx = document.getElementById('distance-plot2').getContext('2d');
       $('#distance2').highcharts({
@@ -229,7 +247,8 @@
             type: "scatter",
             height: 140,
             width: 1160,
-            renderTo: "chart"
+            renderTo: "chart",
+            backgroundColor: "rgba(255,255,255,0.0)"
         },
         title: {
             style: {
@@ -351,6 +370,13 @@
           $('[data-toggle="popover"]').popover({
           })    
         });
+    </script>
+    <script>
+      function scrollTo(name) {
+        $('html,body').animate({
+          scrollTop: $(name).offset().top},
+        'slow');
+      }
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
