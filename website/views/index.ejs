@@ -53,6 +53,7 @@
           </ul>
           <br>
           <hr style="border-color: white">
+          <br>
           <h4 style="text-align: center">The Exoplanet Ranking</h4>
           Each exoplanet from the original dataset has been studied and given a score computed by similarity to the Earth. On the left side is our ranking with the <i>original</i> data, on the right is the ranking with our <i>weighted</i> data. Try to hover them to find out more about the planet!
       </div>
@@ -213,15 +214,19 @@
       <script>
 
       var distseries = []
-      for(var i=0; i < 12; i++){
-        var tp = "<%- data["+str(i)+"] %>"
-        console.log(tp.fst_dist)
-        console.log(tp.fpl_name)
+      var plnames = ['K2-85 b', 'K2-117 b', 'K2-117 c', 'K2-49 b', 'K2-4 b', 'K2-153 b', 'EPIC 201833600 c',
+                      'K2-50 b', 'K2-83 b', 'K2-83 c', 'K2-151 b', 'K2-257 b', 'K2-264 b', 'K2-266 c',
+                    'K2-264 c', 'K2-239 c', 'K2-239 b', 'K2-239 d', 'K2-266 e', 'K2-266 d']
+      var dists = ['97.49', '101.95', '101.95', '463.06', '233.37', '143.6', '259.33', 
+                      '259.33', '125.98', '125.98', '69.61', '64.1', '187', '77.16',
+                    '187', '49', '49', '49', '77.16', '77.16']
+      for(var i=0; i < plnames.length; i++){
+        
         distseries.push(
           {
-            name: tp.fpl_name,
+            name: plnames[i],
             color: "#4cb6e8",
-            data: [[Number("<%- data[i].fst_dist %>"), 0]],
+            data: [[Number(dists[i]), 0]],
           }
         )
       }
@@ -235,8 +240,6 @@
             }
 
         })
-      //console.log(distseries)
-      console.log("<%= data[8].fpl_name %>")
       
       var ctx = document.getElementById('distance-plot2').getContext('2d');
       $('#distance2').highcharts({
@@ -245,7 +248,7 @@
         },
         chart: {
             type: "scatter",
-            height: 140,
+            height: 180,
             width: 1160,
             renderTo: "chart",
             backgroundColor: "rgba(255,255,255,0.0)"
@@ -269,9 +272,9 @@
             itemStyle: {
                 color: "#000",
                 fontFamily: "Stationery, Helvetica, Arial, sans-serif",
-                fontSize: "8px",
+                fontSize: "10px",
                 fontWeight: "normal",
-                lineHeight: "10px",
+                lineHeight: "12px",
                 textTransform: "uppercase"
             },
             borderWidth: 0,
@@ -287,7 +290,7 @@
 
             },
             min: 0,
-            max: 8500,
+            max: 500,
             labels: {
                 enabled: !1
             },
