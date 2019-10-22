@@ -46,11 +46,11 @@ As a first step we removed the columns, that contained irrelevant information fo
 
 Afterwards we explored the distributions of each variable. As some of variables vary a lot, some of them are almost constant across all the dataset. To make it more clear, we plot mean value of each variable with its standard deviation in the Figure~\ref{pic:mean}. As can be seen, attributes like \verb|fst_mass| (stellar mass) or \verb|fst_lum| (stellar luminosity) have really small in comparison to others. On the other hand \verb|fst_teff| (effective temperature) and \verb|fpl_orbper| (orbit period) differ a lot. To be able to plot all the variables, it was necessary to log-scale all the values. 
 
-Futhermore some of the variables might be correlated (mutually influenced). Due to that, we have computed correlation matrix for each pair of variables. As illustrated by Figure~\ref{pic:corr}, \verb|fst_logg| (gravity acceleration at the stellar surface) and \verb|fst_lum| (stellar luminosity) are highly correlated, which means that with the gravity acceleration the luminosity of the star decreases.
+Furthermore some of the variables might be correlated (mutually influenced). Due to that, we have computed correlation matrix for each pair of variables. As illustrated by Figure~\ref{pic:corr}, \verb|fst_logg| (gravity acceleration at the stellar surface) and \verb|fst_lum| (stellar luminosity) are highly correlated, which means that with the gravity acceleration the luminosity of the star decreases.
 
 To finish the analysis, we try to group exoplanets by its properties, as the planets are situated in the vector space (not in the universe). First of all we have to normalize all the values to be in the same range (from 0 to 1). After that the clustering can be applied. We use k-means algorithm implemented in \textit{Scikit-learn}\footnote{https://scikit-learn.org} library for machine learning. It is surprising that the optimal number of clusters is \numprint{2}, since there are \numprint{4} thousand exoplanets in the dataset.
 
-We can see in Figure~\ref{pic:cluster} that the Earth is situated in the green cluster where is \numprint[\%]{77.5} of the exoplanets. The planets are clearly distinguishable even though the space is projected by SVD (\textit{Scikit-learn}\footnotemark[\value{footnote}] implementation is used) into 2 dimensions.
+We can see in Figure~\ref{pic:cluster} that the Earth is situated in the green cluster where is \numprint[\%]{77.5} of the exoplanets. The planets are clearly distinguishable even though the space is projected by Singular-Value Decomposition (SVD, \textit{Scikit-learn}\footnotemark[\value{footnote}] implementation is used) into 2 dimensions.
 
 \begin{figure}\centering
     \includegraphics[width=0.9\textwidth]{graphics/cluster.pdf}
@@ -61,7 +61,7 @@ We can see in Figure~\ref{pic:cluster} that the Earth is situated in the green c
 %------------------------------------------------------------------
 
 \section{Exoplanet Ranking}
-To compute the ranking we use vector similarity between each exoplanet and the Earth. All those vectors are obtained from the Exoplanet dataset. The vectors are preprocessed, so there is not any missing data and the values are normalized into same range (from 0 to 1).
+To compute the ranking we use vector similarity between each exoplanet and the Earth. All those vectors are obtained from the Exoplanet dataset. The vectors are preprocessed, so there is not any missing data and the values are normalized. The ranking output is a value for each exoplanet in the range from 0 to 10 (rescaled by multiplying) where 10 means the most similar planet.
 
 Cosine distance implemented in \textit{Scikit-learn}\footnotemark[\value{footnote}] library is used as a similarity measure between vectors. The presumption is that the most similar exoplanets to the Earth are the most likely sufficient for the life. The exact formula is displayed in Formula~\ref{eq:cosine}.
 
@@ -71,7 +71,7 @@ Cosine distance implemented in \textit{Scikit-learn}\footnotemark[\value{footnot
 
 It is supposed that some parameters have a bigger impact than others on how ``livable`` an exoplanet is. For instance, the metal abundance is probably not as important as surface temperature. Therefore two rankings have been computed -- the second one take into account the weight of the parameters.
 
-We created a weight vector $w$ that can be seen in Table~\ref{tab:att_desc} with weight in range from 1--10 for each attribute of exoplanets. To compute the weighted cosine similarity the library \textit{SciPy}\footnote{https://www.scipy.org} is used. Where it is implemented as correlation between vectors with weighted averages as describes Formula~\ref{eq:cosine_weighted} and Formula~\ref{eq:weighted_mean}, where $u$ and $v$ are the vectors of exoplanets.
+We created a weight vector $w$ that can be seen in Table~\ref{tab:att_desc} with weight in range from 1--10 for each attribute of exoplanets. To compute the weighted cosine similarity the library \textit{SciPy}\footnote{https://www.scipy.org} is used. Where it is implemented as correlation between vectors with weighted averages as describe Formula~\ref{eq:cosine_weighted} and Formula~\ref{eq:weighted_mean}, where $u$ and $v$ are the vectors of exoplanets.
 
 \begin{align}
 \text{cosine}_{\text{weighted}}(u,v,w) &= \frac{\sum_{i=0}^{n-1} (u_i-\overline{u_w})(v_i-\overline{v_w})  }{ \sqrt{\sum_{i=0}^{n-1} (u_i-\overline{u_w})^2  } \sqrt{\sum_{i=0}^{n-1} (v_i-\overline{v_w})^2  }} \label{eq:cosine_weighted} \\
@@ -80,22 +80,32 @@ We created a weight vector $w$ that can be seen in Table~\ref{tab:att_desc} with
 
 %------------------------------------------------------------------
 
-\section{Webapp}
-We then came up with a node.js web application to display the results of our ranking, This website uses native HTML/CSS/JS, a node.js templating engine to pass data to views as well as some data visualisation framework such as chart.js to make it easier to display our data.
+\section{Web App}
+For our product we created a node.js web application to display the results of our ranking. The website uses native HTML/CSS/JS with Bootstrap classes, a node.js template engine called EJS to pass data to views as well as some data visualisation frameworks such as chart.js to make it easier to display our data.
 
-The Webapp displays the ten first planets for both the weighted and unweighted ranking.
+The design of the website is meant to be a little mysterious to catch the eye of potentially interested people. Since this website is meant to be presented on fairs or other events, the first view just features few aspects like the caption and an image of a planet on the colorfully modified background to be quickly recognized by astronomy enthusiasts and other people enjoying the wonders of outer space.
+
+In the following sections of the website our ranking is presented, whereas the user can directly compare both variants of the ranking. Underneath are more graphics about interesting facts we found working with the dataset made with chartjs and highchartjs. In the first place a bar chart shows the amount of exoplanets, that were discovered in each year from 1991 to 2019, where remarkable amounts were found in 2014 and 2016. In the visualization underneath the distance of the first 20 planets of our weighted ranking to the Earth is displayed. The aspects are meant to be rather easy understandable to even raise the interest of younger enthusiasts.
+To make this website more user-friendly all plots and the tables react on the users mouse hover to show more details of the specified objects.
+
+Typically users that can interact with different objects on the website tend to keep the product in better memory. In this way our website directly enforces our business goals and addresses the potential user group.
+Currently the website can be reached here: \url{http://ec2-52-201-232-146.compute-1.amazonaws.com:3000}.
 
 %------------------------------------------------------------------
 
-\section{Results}
-bla, bla,...
+\section{Conclusion}
+According to our ranking, the most suitable planet would be K2-85 b. With a score of 9.96 for the regular ranking and 9.94 for the weighted ranking; it has a temperature of 351 K, which is a lot for a human to withstand without proper equipment, but looking at the repartition of the temperature column in the dataset, this is a pretty good result. We can also note that the density of k2-85 b is very simmilar to earth's, and therefore wouldn't make the gravity feel much different for a human.
+
+On the other hand, the worst planet for the weighted ranking 
+is BD+20 2457 b, with a score of 4.21 out of 10. In addition to being 4762 parsecs away from earth (it would take 13821 years travelling at the speed of light to reach it), it's surface temperature is about 2370 Degrees Kelvin, which makes it a really bad choice to be mankind's next home.
+
+Even though providing a reliable ranking would require a deeper knowledge of astronomy, we can safely (but naively) say that our ranking gives a good glimpse on what could be mankind's next home.
 
 %------------------------------------------------------------------
 
 \printbibliography
 
 \appendix
-
 \begin{landscape}
     \section{Dataset Attributes}
     \begin{table}[!h]\centering
@@ -122,20 +132,20 @@ bla, bla,...
             fst\_age         & stellar age (in billions) & 8 \\ \hline
         \end{tabular}
     \end{table}
+    
+    \newpage
+    \section{Charts}
+    \begin{figure}[!ht]\centering
+        \includegraphics[width=1.5\textwidth]{graphics/mean_deviation.pdf}
+        \caption{log-scaled mean of each variable with its standard deviation}
+        \label{pic:mean}
+    \end{figure}
+    
+    \begin{figure}[!ht]\centering
+        \includegraphics[width=1.8\textwidth]{graphics/correlation_matrix.pdf}
+        \caption{correlation matrix of variables}
+        \label{pic:corr}
+    \end{figure}
 \end{landscape}
-
-\section{Charts}
-
-\begin{figure}[!ht]\centering
-    \includegraphics[angle=90, width=0.7\textwidth]{graphics/mean_deviation.pdf}
-    \caption{log-scaled mean of each variable with its standard deviation}
-    \label{pic:mean}
-\end{figure}
-
-\begin{figure}[!ht]\centering
-    \includegraphics[angle=90, width=1\textwidth]{graphics/correlation_matrix.pdf}
-    \caption{correlation matrix of variables}
-    \label{pic:corr}
-\end{figure}
 
 \end{document}
