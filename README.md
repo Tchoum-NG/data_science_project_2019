@@ -35,3 +35,7 @@ node index.js
 * **Nathan Goron** - *Visualizations* - <nathan.goron@helsinki.fi>
 * **Franz Motzkus** - *Web App* - <franz.motzkus@helsinki.fi>
 * **Tomáš Vopat** - *Machine Learning* - <tomas.vopat@helsinki.fi>
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
