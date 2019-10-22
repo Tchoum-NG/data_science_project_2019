@@ -48,7 +48,7 @@ Afterwards we explored the distributions of each variable. As some of variables 
 
 Furthermore some of the variables might be correlated (mutually influenced). Due to that, we have computed correlation matrix for each pair of variables. As illustrated by Figure~\ref{pic:corr}, \verb|fst_logg| (gravity acceleration at the stellar surface) and \verb|fst_lum| (stellar luminosity) are highly correlated, which means that with the gravity acceleration the luminosity of the star decreases.
 
-To finish the analysis, we try to group exoplanets by its properties, as the planets are situated in the vector space (not in the universe). First of all we have to normalize all the values to be in the same range (from 0 to 1). After that the clustering can be applied. We use k-means algorithm implemented in \textit{Scikit-learn}\footnote{https://scikit-learn.org} library for machine learning. It is surprising that the optimal number of clusters is \numprint{2}, since there are \numprint{4} thousand exoplanets in the dataset.
+To finish the analysis, we try to group exoplanets by its properties, as the planets are situated in the vector space (not in the universe). First of all we have to normalize all the values to be in the same range (from 0 to 1). After that the clustering can be applied. We use k-means algorithm implemented in \textit{Scikit-learn}\footnote{\url{https://scikit-learn.org}} library for machine learning. It is surprising that the optimal number of clusters is \numprint{2}, since there are \numprint{4} thousand exoplanets in the dataset.
 
 We can see in Figure~\ref{pic:cluster} that the Earth is situated in the green cluster where is \numprint[\%]{77.5} of the exoplanets. The planets are clearly distinguishable even though the space is projected by Singular-Value Decomposition (SVD, \textit{Scikit-learn}\footnotemark[\value{footnote}] implementation is used) into 2 dimensions.
 
@@ -71,7 +71,7 @@ Cosine distance implemented in \textit{Scikit-learn}\footnotemark[\value{footnot
 
 It is supposed that some parameters have a bigger impact than others on how ``livable`` an exoplanet is. For instance, the metal abundance is probably not as important as surface temperature. Therefore two rankings have been computed -- the second one take into account the weight of the parameters.
 
-We created a weight vector $w$ that can be seen in Table~\ref{tab:att_desc} with weight in range from 1--10 for each attribute of exoplanets. To compute the weighted cosine similarity the library \textit{SciPy}\footnote{https://www.scipy.org} is used. Where it is implemented as correlation between vectors with weighted averages as describe Formula~\ref{eq:cosine_weighted} and Formula~\ref{eq:weighted_mean}, where $u$ and $v$ are the vectors of exoplanets.
+We created a weight vector $w$ that can be seen in Table~\ref{tab:att_desc} with weight in range from 1--10 for each attribute of exoplanets. To compute the weighted cosine similarity the library \textit{SciPy}\footnote{\url{https://www.scipy.org}} is used. Where it is implemented as correlation between vectors with weighted averages as describe Formula~\ref{eq:cosine_weighted} and Formula~\ref{eq:weighted_mean}, where $u$ and $v$ are the vectors of exoplanets.
 
 \begin{align}
 \text{cosine}_{\text{weighted}}(u,v,w) &= \frac{\sum_{i=0}^{n-1} (u_i-\overline{u_w})(v_i-\overline{v_w})  }{ \sqrt{\sum_{i=0}^{n-1} (u_i-\overline{u_w})^2  } \sqrt{\sum_{i=0}^{n-1} (v_i-\overline{v_w})^2  }} \label{eq:cosine_weighted} \\
@@ -81,20 +81,18 @@ We created a weight vector $w$ that can be seen in Table~\ref{tab:att_desc} with
 %------------------------------------------------------------------
 
 \section{Web App}
-For our product we created a node.js web application to display the results of our ranking. The website uses native HTML/CSS/JS with Bootstrap classes, a node.js template engine called EJS to pass data to views as well as some data visualisation frameworks such as chart.js to make it easier to display our data.
+For our product we created a Node.js\footnote{\url{https://nodejs.org}} web application to display the results of our ranking. The website uses native HTML/CSS/JS with Bootstrap\footnote{\url{https://getbootstrap.com}} classes, a node.js template engine called EJS\footnote{\url{https://ejs.co}} to pass data to views as well as some data visualisation frameworks such as chart.js to make it easier to display our data.
 
-The design of the website is meant to be a little mysterious to catch the eye of potentially interested people. Since this website is meant to be presented on fairs or other events, the first view just features few aspects like the caption and an image of a planet on the colorfully modified background to be quickly recognized by astronomy enthusiasts and other people enjoying the wonders of outer space.
+The Web App displays the ranking, so the user can directly compare both variants of the ranking (the standard and the weighted one). Underneath there is a bar chart showing the amount of exoplanets discovered in each year from 1991 to 2019, where remarkable amount of exoplanets was discovered in years 2014 and 2016. In the end the distance of the top \numprint{20} planets is displayed. All the plots and the tables react on the user's mouse hover to show more details about the specific object.
 
-In the following sections of the website our ranking is presented, whereas the user can directly compare both variants of the ranking. Underneath are more graphics about interesting facts we found working with the dataset made with chartjs and highchartjs. In the first place a bar chart shows the amount of exoplanets, that were discovered in each year from 1991 to 2019, where remarkable amounts were found in 2014 and 2016. In the visualization underneath the distance of the first 20 planets of our weighted ranking to the Earth is displayed. The aspects are meant to be rather easy understandable to even raise the interest of younger enthusiasts.
-To make this website more user-friendly all plots and the tables react on the users mouse hover to show more details of the specified objects.
+Design is meant to be a little mysterious to catch the eye of potentially interested people, since the website is meant to be presented on fairs or other events. The homepage shows features like the caption and an image of a planet on the colourfully modified background to be quickly recognized by astronomy enthusiasts and other people enjoying the wonders of outer space.
 
-Typically users that can interact with different objects on the website tend to keep the product in better memory. In this way our website directly enforces our business goals and addresses the potential user group.
-Currently the website can be reached here: \url{http://ec2-52-201-232-146.compute-1.amazonaws.com:3000}.
+Currently the website can be reached at \url{http://ec2-52-201-232-146.compute-1.amazonaws.com:3000}.
 
 %------------------------------------------------------------------
 
 \section{Conclusion}
-According to our ranking, the most suitable planet would be K2-85 b. With a score of 9.96 for the regular ranking and 9.94 for the weighted ranking; it has a temperature of 351 K, which is a lot for a human to withstand without proper equipment, but looking at the repartition of the temperature column in the dataset, this is a pretty good result. We can also note that the density of k2-85 b is very simmilar to earth's, and therefore wouldn't make the gravity feel much different for a human.
+According to our ranking, the most suitable planet would be K2-85 b. With a score of 9.96 for the regular ranking and 9.94 for the weighted ranking; it has a temperature of 351 K, which is a lot for a human to withstand without proper equipment, but looking at the repartition of the temperature column in the dataset, this is a pretty good result. We can also note that the density of k2-85 b is very similar to earth's, and therefore wouldn't make the gravity feel much different for a human.
 
 On the other hand, the worst planet for the weighted ranking 
 is BD+20 2457 b, with a score of 4.21 out of 10. In addition to being 4762 parsecs away from earth (it would take 13821 years travelling at the speed of light to reach it), it's surface temperature is about 2370 Degrees Kelvin, which makes it a really bad choice to be mankind's next home.
