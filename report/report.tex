@@ -108,25 +108,25 @@ Even though providing a reliable ranking would require a deeper knowledge of ast
     \begin{table}[!h]\centering
         \caption{Attributes Description}
         \label{tab:att_desc}
-        \begin{tabular}{|l l c|}\hline
-            Attribute         & Description & Weight \\ \hline\hline
-            fpl\_orbper      & orbital period (days) & 5 \\ \hline
-            fpl\_smax        & the longest radius of an elliptic orbit & 3 \\ \hline
-            fpl\_bmasse    & mass of the planet (earth unit) & 5 \\ \hline
-            fpl\_rade         & radius (earth unit) & 5 \\ \hline
-            fpl\_dens        & density of the planet (g/cm**3) & 7 \\ \hline
-            fpl\_tranflag    & wether the lanet transits the star or not & 1 \\ \hline
-            fpl\_cbflag      & does planet orbit a binary solar system & 5 \\ \hline
-            fpl\_snum       & number of stars in the solar system & 8 \\ \hline
-            dec                 & declination of the planetary system & 3 \\ \hline
-            fst\_teff          & effective temperature in Kelvins & 10 \\ \hline
-            fst\_logg        & gravity acceleration at the star surface log10(cm/s**2) & 4 \\ \hline
-            fst\_lum         & star lumonisty log10(lumonisity) & 4 \\ \hline
-            fst\_mass       & stellar mass (sun unit) & 6 \\ \hline
-            fst\_rad         & stellar raidus (sun unit) & 6 \\ \hline
-            fst\_met        & star metallicity & 3 \\ \hline
-            fst\_metratio & metal abundance (in comparison to sun) & 1 \\ \hline
-            fst\_age         & stellar age (in billions) & 8 \\ \hline
+        \begin{tabular}{|l l c c |}\hline
+            Attribute         & Description                                         & Unit          & Weight \\ \hline\hline
+            fpl\_orbper      & orbital period                                     & days            & 5 \\ \hline
+            fpl\_smax        & the longest radius of an elliptic orbit    & AU             &3 \\ \hline
+            fpl\_bmasse    & mass of the planet                              & Earth mass & 5 \\ \hline
+            fpl\_rade         & planet radius                                       & Earth radii    & 5 \\ \hline
+            fpl\_dens        & density of the planet                            & $g/cm^3$  & 7 \\ \hline
+            fpl\_tranflag    & wether the lanet transits the star or not & bool          & 1 \\ \hline
+            fpl\_cbflag      & does planet orbit a binary solar system  & bool           & 5 \\ \hline
+            fpl\_snum       & number of stars in the solar system      & integer        & 8 \\ \hline
+            dec                 & declination of the planetary system       & decimal degrees & 3 \\ \hline
+            fst\_teff          & effective temperature                          & K                 & 10 \\ \hline
+            fst\_logg        & gravity acceleration at the star surface  & $\log_{10}{\left( \text{cm}/s^2\right)}$ & 4 \\ \hline
+            fst\_lum         & star lumonisty                                     & $\log_{10}{\left( \textit{Solar luminosty}\right)}$ & 4 \\ \hline
+            fst\_mass       & stellar mass                                        & Solar mass  & 6 \\ \hline
+            fst\_rad         & stellar raidus                                        & Solar radii    & 6 \\ \hline
+            fst\_met        & star metallicity                                      & dex            & 3 \\ \hline
+            fst\_metratio & metal abundance                                    & [Fe/H], [M/H]  & 1 \\ \hline
+            fst\_age         & stellar age                                            & Gyr              & 8 \\ \hline
         \end{tabular}
     \end{table}
     
